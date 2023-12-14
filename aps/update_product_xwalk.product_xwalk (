@@ -1,0 +1,10 @@
+--insert into  processdb..product_xwalk (client, population, lob, product)
+select   distinct 
+         ct.client,
+         ct.population,
+         'MEDICARE' lob,
+         'TRIPLESADV MA' product
+from     member..contracts ct
+         left join processdb..product_xwalk px on ct.client = px.client and ct.population = px.population
+where    ct.client = 'triplesadv'
+         and px.population is null
